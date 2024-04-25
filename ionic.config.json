@@ -1,0 +1,7 @@
+{
+  "name": "blive-monitor-send",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
