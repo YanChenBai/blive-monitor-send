@@ -3,7 +3,18 @@ http://ionicframework.com/docs/theming/ */
 
 :root {
   --ion-color-primary: #fb7299;
+}
 
+ion-toast {
+  --background: #1f1f1f;
+  --color: #ffffff;
+}
+
+body {
+  --background: #121212;
+}
+
+body.scanner-active {
   --background: transparent;
   --ion-background-color: transparent;
 }

@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "test:e2e": "cypress run",
     "test:unit": "vitest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "dev:android": "ionic capacitor run android -l --host=0.0.0.0"
   },
   "dependencies": {
     "@capacitor-community/barcode-scanner": "^4.0.1",
@@ -18,12 +19,15 @@
     "@capacitor/core": "5.1.1",
     "@capacitor/haptics": "^5.0.5",
     "@capacitor/keyboard": "5.0.5",
+    "@capacitor/screen-orientation": "^5.0.0",
     "@capacitor/status-bar": "^5.0.5",
     "@ionic/vue": "^8.0.0",
     "@ionic/vue-router": "^8.0.0",
     "axios": "^1.6.8",
     "ionicons": "^7.0.0",
     "lucide-vue-next": "^0.373.0",
+    "pinia": "^2.1.7",
+    "pinia-plugin-persistedstate": "^3.2.1",
     "vue": "^3.3.0",
     "vue-router": "^4.2.0"
   },
