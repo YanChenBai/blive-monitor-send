@@ -8,8 +8,8 @@
             @click="switchRoom(item.roomInfo.roomId)"
             class="flex gap-2 p2 rounded-2 bg-white/10 border-2px border-solid transition-all"
             flex="shrink-0 justify-between items-center" :class="[
-            currentRoomId === item.roomInfo.roomId ? 'border-#fb7299/70' : 'border-transparent'
-          ]">
+              currentRoomId === item.roomInfo.roomId ? 'border-#fb7299/70' : 'border-transparent'
+            ]">
             <div size-40px rounded-2 overflow-hidden>
               <img :src="item.roomInfo.face" />
             </div>
@@ -83,6 +83,7 @@ import EmojiTab from '@/components/EmojiTab.vue'
 import router from '@/router';
 import { useConfigStore } from '@/stores'
 import axios from 'axios';
+import { completeUrl } from '@/utils/api';
 
 const configStore = useConfigStore()
 const roomsWrapRef = ref<HTMLDivElement>()
@@ -95,12 +96,15 @@ const currentRoom = computed(() => {
   return rooms.value.find((item) => item.roomInfo.roomId === currentRoomId.value)
 })
 
-const createApi = () => axios.create({
-  baseURL: configStore.ip ? `http://${configStore.ip}:5520` : '',
-  headers: configStore.token ? {
-    Authorization: configStore.token
-  } : {}
-})
+const createApi = () => {
+  const url = completeUrl(configStore.ip ?? '')
+  return axios.create({
+    baseURL: configStore.ip ? `http://${url}` : '',
+    headers: configStore.token ? {
+      Authorization: configStore.token
+    } : {}
+  })
+}
 
 let api = createApi()
 

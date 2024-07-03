@@ -10,3 +10,11 @@ export const api = axios.create({
   headers: HEADERS
 })
 
+export function completeUrl(url: string) {
+  const split = url.split(':')
+  if(split.length === 1) {
+    return `${url}:5520`
+  }else {
+    return url
+  }
+}

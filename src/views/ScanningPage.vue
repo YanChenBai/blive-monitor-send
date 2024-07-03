@@ -18,6 +18,7 @@ import { IonPage, IonButton, onIonViewDidEnter, onIonViewWillLeave } from '@ioni
 import axios from 'axios';
 import { ref } from 'vue';
 import { useConfigStore } from '@/stores'
+import { completeUrl } from '@/utils/api';
 
 defineOptions({ name: 'ScanningPage' })
 
@@ -40,11 +41,13 @@ async function startScan() {
     try {
         if (!result.hasContent) throw new Error()
 
-        const { ip, token } = JSON.parse(result.content)
+        const { ip, token } = JSON.parse(result.content) as { ip?: string, token?: string }
 
         if (!ip || !token) throw new Error()
 
-        const res = await axios.get(`http://${ip}:5520/check`, {
+        const url = completeUrl(ip)
+
+        const res = await axios.get(`http://${url}/check`, {
             headers: {
                 Authorization: token
             }
