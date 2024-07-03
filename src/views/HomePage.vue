@@ -99,7 +99,7 @@ const currentRoom = computed(() => {
 const createApi = () => {
   const url = completeUrl(configStore.ip ?? '')
   return axios.create({
-    baseURL: configStore.ip ? `http://${url}` : '',
+    baseURL: configStore.ip ? `${configStore.ssl ? 'https' : 'http'}://${url}` : '',
     headers: configStore.token ? {
       Authorization: configStore.token
     } : {}

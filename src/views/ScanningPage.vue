@@ -40,27 +40,30 @@ async function startScan() {
 
     try {
         if (!result.hasContent) throw new Error()
+        console.log(result.hasContent);
+        
+        const { ip, token, ssl } = JSON.parse(result.content) as { ip?: string, token?: string, ssl?: boolean }
 
-        const { ip, token } = JSON.parse(result.content) as { ip?: string, token?: string }
-
-        if (!ip || !token) throw new Error()
+        if (!ip || !token) throw new Error(result.content)
 
         const url = completeUrl(ip)
+        const isSsl = ssl ?? false
 
-        const res = await axios.get(`http://${url}/check`, {
+        const res = await axios.get(`${isSsl ? 'https' : 'http'}://${url}/check`, {
             headers: {
                 Authorization: token
             }
         })
 
         if (res.status === 200) {
-            toast('连接成功')
             configStore.ip = ip
             configStore.token = token
+            configStore.ssl = isSsl
+            toast('连接成功')
         }
 
     } catch (error) {
-        toast('无效二维码')
+        toast('无效二维码' + error)
     }
 
     loading.value = false

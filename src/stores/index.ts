@@ -9,15 +9,17 @@ export const useConfigStore = defineStore(
   () => {
     const ip = ref<string>()
     const token = ref<string>()
+    const ssl = ref(false)
 
     return {
       ip,
-      token
+      token,
+      ssl
     }
   },
   {
     persist: {
-      // paths: ['ip', 'token']
+      paths: ['ip', 'token', 'ssl']
     }
   }
 )
